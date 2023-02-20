@@ -7,8 +7,8 @@ export type InputRNtoHTML = {
   type: RnComponentsUnion | (() => any);
   props: Partial<{
     style: StyleRecord;
-    children: InputRNtoHTML[] | string | null | undefined;
   }>;
+  children?: InputRNtoHTML[] | string | null | undefined | any[];
 };
 export type MappedNode = {
   type: string;
