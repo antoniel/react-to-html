@@ -2,7 +2,7 @@ import { format as prettyFormat, plugins } from "pretty-format";
 
 export const fromRNtoHTML = (input: Record<string, any>) =>
   prettyFormat(input, {
-    plugins: [ReactTestNativeJestPreview, plugins.ReactElement],
+    plugins: [ReactTestNativeJestPreview],
     highlight: false,
     printBasicPrototype: false,
   });
@@ -18,25 +18,29 @@ function convertToKebabCase(cssObj: { [key: string]: string }): {
     }
   }
   return kebabObj;
+
+}
+function isValidElement(object: any) {
+  return typeof object === 'object' && object !== null && object.$$typeof === Symbol.for('react.element');
 }
 
 const ReactTestNativeJestPreview = {
-  test: plugins.ReactTestComponent.test,
+  test: isValidElement,
   serialize: (val: any, config: any, indentation: any, depth: any, refs: any, printer: any) => {
     let newVal = val;
-    if (val.type === "Text") {
+    if (val?.type === "Text") {
       newVal = { ...val, type: "p" };
     }
-    if (val.type === "View") {
+    if (val?.type === "View") {
       newVal = { ...val, type: "div" };
     }
-    if (val.props.style) {
+    if (val?.props?.style) {
       newVal = {
         ...newVal,
         props: { ...val.props, style: convertToKebabCase(val.props.style) },
       };
     }
-    return plugins.ReactTestComponent.serialize(
+    return plugins.ReactElement.serialize(
       newVal,
       config,
       indentation,
@@ -45,4 +49,4 @@ const ReactTestNativeJestPreview = {
       printer
     );
   },
-};
+}
