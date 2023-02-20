@@ -117,7 +117,7 @@ describe('fixtures', () => {
                       handlerTag={1}
                       handlerType=\\"PanGestureHandler\\"
                       needsOffscreenAlphaCompositing={false}
-                      style=\\"flex: 1; transform: [object Object],[object Object]px\\"
+                      style=\\"flex: 1; transform: translateX(0px) translateX(0px)\\"
                     >
                       <div
                         style=\\"0: [object Object]px; 1: [object Object]px; flex: 1; overflow: hidden\\"

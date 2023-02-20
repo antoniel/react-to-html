@@ -9,6 +9,7 @@ export const mapStyleProp = (node: MappedNode) => {
   const style = pipe(
     node.props.style,
     mergeStyles,
+    handleTransformStyle,
     convertToKebabCase,
     convertToPx,
     convertToInlineStyle
@@ -116,20 +117,29 @@ const handleTransformStyle = (style: TransformStyle) => {
         transform: transformString,
       };
     }
-    return acc;
+    return { ...acc, [key]: objectTransformValues };
   }, {} as StyleRecord);
 };
 
 if (import.meta.vitest) {
   describe('Transform Style', () => {
-    test('Base', () => {
+    test('Output transform string with units', () => {
       expect(
         handleTransformStyle({
-          transform: [{ translateX: 10 }, { translateY: 10 }],
+          transform: [{ translateX: 10 }, { translateY: '10%' }],
         })
       ).toEqual({
-        transform: 'translateX(10px) translateY(10px)',
+        transform: 'translateX(10px) translateY(10%)',
       });
+    });
+    test('Inputs without transform', () => {
+      expect(
+        handleTransformStyle({
+          color: 'red',
+          backgroundColor: '#00f',
+          fontSize: 32,
+        })
+      ).toEqual({ color: 'red', backgroundColor: '#00f', fontSize: 32 });
     });
   });
 }
