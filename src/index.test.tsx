@@ -10,10 +10,10 @@ it('fromRNtoHTML', () => {
   );
 
   expect(some).toMatchInlineSnapshot(`
-    "<View>
-      <Text>
+    "<div>
+      <p>
         oi
-      </Text>
-    </View>"
+      </p>
+    </div>"
   `);
 });
