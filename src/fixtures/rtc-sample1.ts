@@ -157,8 +157,15 @@ export const sample1 = {
                                                         pb: '16px',
                                                         pt: '40px',
                                                         bg: '#FFFFFF',
-                                                        className:
-                                                          'sc-bczRLJ diulGd',
+                                                        style: [
+                                                          {
+                                                            backgroundColor:
+                                                              '#FFFFFF',
+                                                            paddingBottom: 16,
+                                                            paddingTop: 40,
+                                                            paddingHorizontal: 24,
+                                                          },
+                                                        ],
                                                       },
                                                       children: [
                                                         {
@@ -168,16 +175,25 @@ export const sample1 = {
                                                               'row',
                                                             justifyContent:
                                                               'space-between',
-                                                            className:
-                                                              'sc-bczRLJ kKYxQH',
+                                                            style: [
+                                                              {
+                                                                flexDirection:
+                                                                  'row',
+                                                                justifyContent:
+                                                                  'space-between',
+                                                              },
+                                                            ],
                                                           },
                                                           children: [
                                                             {
                                                               type: 'View',
                                                               props: {
                                                                 flexGrow: 1,
-                                                                className:
-                                                                  'sc-bczRLJ bcHLDf',
+                                                                style: [
+                                                                  {
+                                                                    flexGrow: 1,
+                                                                  },
+                                                                ],
                                                               },
                                                               children: [
                                                                 {
@@ -188,8 +204,15 @@ export const sample1 = {
                                                                       'row',
                                                                     alignItems:
                                                                       'center',
-                                                                    className:
-                                                                      'sc-bczRLJ cdKnJO',
+                                                                    style: [
+                                                                      {
+                                                                        flexDirection:
+                                                                          'row',
+                                                                        alignItems:
+                                                                          'center',
+                                                                        marginBottom: 16,
+                                                                      },
+                                                                    ],
                                                                   },
                                                                   children: [
                                                                     {
@@ -210,8 +233,13 @@ export const sample1 = {
                                                                   props: {
                                                                     flexGrow: 1,
                                                                     w: '100%',
-                                                                    className:
-                                                                      'sc-bczRLJ fFDfYY',
+                                                                    style: [
+                                                                      {
+                                                                        flexGrow: 1,
+                                                                        width:
+                                                                          '100%',
+                                                                      },
+                                                                    ],
                                                                   },
                                                                   children: [
                                                                     {
@@ -222,11 +250,34 @@ export const sample1 = {
                                                                           'h2',
                                                                         color:
                                                                           'brand_primary_darkest',
-                                                                        className:
-                                                                          'sc-gsnTZi cNeZGI',
+                                                                        style: [
+                                                                          {
+                                                                            color:
+                                                                              '#004E87',
+                                                                            maxWidth:
+                                                                              '100%',
+                                                                            fontSize: 32,
+                                                                            fontFamily:
+                                                                              'Fieldwork-HumBold',
+                                                                            letterSpacing: 0,
+                                                                            lineHeight: 38.4,
+                                                                            textAlign:
+                                                                              'left',
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            marginTop: 0,
+                                                                            marginRight: 0,
+                                                                            marginBottom: 0,
+                                                                            marginLeft: 0,
+                                                                            paddingTop: 0,
+                                                                            paddingRight: 0,
+                                                                            paddingBottom: 0,
+                                                                            paddingLeft: 0,
+                                                                          },
+                                                                        ],
                                                                       },
                                                                       children: [
-                                                                        'Services',
+                                                                        'Serviços',
                                                                       ],
                                                                     },
                                                                   ],
@@ -243,8 +294,14 @@ export const sample1 = {
                                                         bg: '#FFFFFF',
                                                         px: '24px',
                                                         pt: '24px',
-                                                        className:
-                                                          'sc-bczRLJ iSdUlB',
+                                                        style: [
+                                                          {
+                                                            backgroundColor:
+                                                              '#FFFFFF',
+                                                            paddingTop: 24,
+                                                            paddingHorizontal: 24,
+                                                          },
+                                                        ],
                                                       },
                                                       children: [
                                                         {
@@ -253,26 +310,71 @@ export const sample1 = {
                                                             type: 'caption',
                                                             color:
                                                               'neutral_medium',
-                                                            style: {
-                                                              lineHeight: 20.8,
-                                                            },
-                                                            className:
-                                                              'sc-gsnTZi zIiGn',
+                                                            style: [
+                                                              {
+                                                                color:
+                                                                  '#9FA5AF',
+                                                                maxWidth:
+                                                                  '100%',
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                  'Roboto-Regular',
+                                                                letterSpacing: 0.8,
+                                                                lineHeight: 16,
+                                                                textAlign:
+                                                                  'left',
+                                                                fontWeight:
+                                                                  '400',
+                                                                marginTop: 0,
+                                                                marginRight: 0,
+                                                                marginBottom: 0,
+                                                                marginLeft: 0,
+                                                                paddingTop: 0,
+                                                                paddingRight: 0,
+                                                                paddingBottom: 0,
+                                                                paddingLeft: 0,
+                                                              },
+                                                              {
+                                                                lineHeight: 20.8,
+                                                              },
+                                                            ],
                                                           },
-                                                          children: ['Vehicle'],
+                                                          children: ['Veículo'],
                                                         },
                                                         {
                                                           type: 'Text',
                                                           props: {
                                                             type: 'subtitle2',
-                                                            style: {
-                                                              lineHeight: 22.200000000000003,
-                                                            },
-                                                            className:
-                                                              'sc-gsnTZi gaqqUb',
+                                                            style: [
+                                                              {
+                                                                color:
+                                                                  '#131416',
+                                                                maxWidth:
+                                                                  '100%',
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                  'Fieldwork-HumBold',
+                                                                letterSpacing: 0.5,
+                                                                textAlign:
+                                                                  'left',
+                                                                fontWeight:
+                                                                  '400',
+                                                                marginTop: 0,
+                                                                marginRight: 0,
+                                                                marginBottom: 0,
+                                                                marginLeft: 0,
+                                                                paddingTop: 0,
+                                                                paddingRight: 0,
+                                                                paddingBottom: 0,
+                                                                paddingLeft: 0,
+                                                              },
+                                                              {
+                                                                lineHeight: 22.200000000000003,
+                                                              },
+                                                            ],
                                                           },
                                                           children: [
-                                                            'Vehicle model',
+                                                            'Renegade 1.8 At',
                                                           ],
                                                         },
                                                         {
@@ -281,11 +383,33 @@ export const sample1 = {
                                                             type: 'body2',
                                                             color:
                                                               'neutral_dark',
-                                                            className:
-                                                              'sc-gsnTZi cxsjCY',
+                                                            style: [
+                                                              {
+                                                                color:
+                                                                  '#454A53',
+                                                                maxWidth:
+                                                                  '100%',
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                  'Roboto-Regular',
+                                                                letterSpacing: 0.25,
+                                                                textAlign:
+                                                                  'left',
+                                                                fontWeight:
+                                                                  '400',
+                                                                marginTop: 0,
+                                                                marginRight: 0,
+                                                                marginBottom: 0,
+                                                                marginLeft: 0,
+                                                                paddingTop: 0,
+                                                                paddingRight: 0,
+                                                                paddingBottom: 0,
+                                                                paddingLeft: 0,
+                                                              },
+                                                            ],
                                                           },
                                                           children: [
-                                                            'GEL xxxx',
+                                                            'GEL 1G46',
                                                           ],
                                                         },
                                                         {
@@ -293,8 +417,12 @@ export const sample1 = {
                                                           props: {
                                                             pt: '8px',
                                                             pb: '24px',
-                                                            className:
-                                                              'sc-bczRLJ brFAmV',
+                                                            style: [
+                                                              {
+                                                                paddingBottom: 24,
+                                                                paddingTop: 8,
+                                                              },
+                                                            ],
                                                           },
                                                           children: [
                                                             {
@@ -304,8 +432,15 @@ export const sample1 = {
                                                                 color:
                                                                   'neutral_lightest',
                                                                 width: '100%',
-                                                                className:
-                                                                  'sc-ksZaOG gbXoHh',
+                                                                style: [
+                                                                  {
+                                                                    height: 1,
+                                                                    width:
+                                                                      '100%',
+                                                                    backgroundColor:
+                                                                      '#F5F5F6',
+                                                                  },
+                                                                ],
                                                               },
                                                               children: null,
                                                             },
@@ -317,16 +452,22 @@ export const sample1 = {
                                                       type: 'View',
                                                       props: {
                                                         px: '24px',
-                                                        className:
-                                                          'sc-bczRLJ jWRABx',
+                                                        style: [
+                                                          {
+                                                            paddingHorizontal: 24,
+                                                          },
+                                                        ],
                                                       },
                                                       children: [
                                                         {
                                                           type: 'View',
                                                           props: {
                                                             mb: '24px',
-                                                            className:
-                                                              'sc-bczRLJ kBQmvj',
+                                                            style: [
+                                                              {
+                                                                marginBottom: 24,
+                                                              },
+                                                            ],
                                                           },
                                                           children: null,
                                                         },
