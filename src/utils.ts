@@ -1,6 +1,6 @@
-import { InputRNtoHTML } from "./types";
+import { InputRNtoHTML, StyleRecord } from "./types";
 
-type StyleRecord = Record<string, string | number>;
+
 export function convertToKebabCase(cssObj: StyleRecord): StyleRecord {
   const kebabObj: StyleRecord = {};
   for (const key in cssObj) {
@@ -13,7 +13,7 @@ export function convertToKebabCase(cssObj: StyleRecord): StyleRecord {
 
 }
 export function isValidElement(object: InputRNtoHTML) {
-  return typeof object === 'object' && object !== null && object.$$typeof === Symbol.for('react.element');
+  return typeof object === 'object' && object !== null && object.type && object.props;
 }
 
 export const convertToInlineStyle = (style: Record<string, string>): string => {
@@ -22,14 +22,17 @@ export const convertToInlineStyle = (style: Record<string, string>): string => {
     .join('; ');
 }
 
-export const convertToPx = (obj: Record<string, string | number>): Record<string, string> => {
+export const convertToPx = (obj: StyleRecord): StyleRecord => {
   return Object.entries(obj)
     .reduce((acc, [key, value]) => {
-      if (typeof value === 'number') {
-        acc[key] = `${value}px`;
+      const isString = typeof value === 'string';
+      const isFlex = key === 'flex';
+      if (isString || isFlex) {
+        acc[key] = value;
         return acc;
       }
-      acc[key] = value as string;
+
+      acc[key] = `${value}px`;
       return acc;
-    }, {} as Record<string, string>);
+    }, {} as StyleRecord);
 }

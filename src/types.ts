@@ -1,11 +1,12 @@
 import * as RnImports from './fixtures/react-native';
 
+export type StyleRecord = Record<string, string | number>;
 export type RnComponentsUnion = keyof typeof RnImports;
 export type InputRNtoHTML = {
   '$$typeof'?: unknown;
   type: RnComponentsUnion | (() => any);
   props: Partial<{
-    style: Record<string, string>;
+    style: StyleRecord;
     children: InputRNtoHTML[] | string | null | undefined;
   }>;
 };
