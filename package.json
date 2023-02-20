@@ -57,6 +57,7 @@
     }
   ],
   "dependencies": {
+    "fp-ts": "^2.13.1",
     "pretty-format": "^29.4.3",
     "ts-pattern": "^4.2.0"
   }
