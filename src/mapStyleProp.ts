@@ -53,7 +53,6 @@ export function convertToKebabCase(style: StyleRecord): StyleRecord {
   return kebabObj;
 }
 
-// onStyleValues we may have  style: [{ flex: 1 }, null], we should filter and merge all the styles
 type StyleRecordRaw =
   | Array<null | undefined | StyleRecord | Array<StyleRecord>>
   | StyleRecord;
