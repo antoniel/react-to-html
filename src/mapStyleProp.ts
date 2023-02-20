@@ -1,18 +1,24 @@
 import { MappedNode, StyleRecord } from './types';
+import { pipe } from 'fp-ts/lib/function';
 
 export const mapStyleProp = (node: MappedNode) => {
   if (!node?.props?.style) {
     return node;
   }
-  const mergedStyles = mergeStyles(node.props.style);
-  const kebabStyle = convertToKebabCase(mergedStyles);
-  const kebabStyleWithPx = convertToPx(kebabStyle);
-  const inlineStyle = convertToInlineStyle(kebabStyleWithPx);
+
+  const style = pipe(
+    node.props.style,
+    mergeStyles,
+    convertToKebabCase,
+    convertToPx,
+    convertToInlineStyle
+  );
+
   return {
     ...node,
     props: {
       ...node.props,
-      style: inlineStyle,
+      style: style,
     },
   };
 };
@@ -75,6 +81,54 @@ if (import.meta.vitest) {
     test('Merge styles with null', () => {
       expect(mergeStyles([{ flex: 1 }, null, { flex: 2 }])).toEqual({
         flex: 2,
+      });
+    });
+  });
+}
+
+type TransformStyle = Record<
+  string,
+  string | number | Array<Record<string, number | string>>
+>;
+const handleTransformStyle = (style: TransformStyle) => {
+  const assertIsTransform = (
+    key: string,
+    value: any
+  ): value is Array<Record<string, any>> => {
+    return key === 'transform' && Array.isArray(value);
+  };
+
+  return Object.entries(style).reduce((acc, [key, objectTransformValues]) => {
+    if (assertIsTransform(key, objectTransformValues)) {
+      const transformValue = objectTransformValues.map(convertToPx);
+      const transformString = transformValue
+        .map((transform: StyleRecord) =>
+          Object.entries(transform)
+            .map(
+              ([transformKey, transformValue]) =>
+                `${transformKey}(${transformValue})`
+            )
+            .join(' ')
+        )
+        .join(' ');
+      return {
+        ...acc,
+        transform: transformString,
+      };
+    }
+    return acc;
+  }, {} as StyleRecord);
+};
+
+if (import.meta.vitest) {
+  describe('Transform Style', () => {
+    test('Base', () => {
+      expect(
+        handleTransformStyle({
+          transform: [{ translateX: 10 }, { translateY: 10 }],
+        })
+      ).toEqual({
+        transform: 'translateX(10px) translateY(10px)',
       });
     });
   });
