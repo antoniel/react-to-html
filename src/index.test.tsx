@@ -134,25 +134,25 @@ describe('fixtures', () => {
                               <div>
                                 <div
                                   bg=\\"#FFFFFF\\"
-                                  className=\\"sc-bczRLJ diulGd\\"
                                   pb=\\"16px\\"
                                   pt=\\"40px\\"
                                   px=\\"24px\\"
+                                  style=\\"background-color: #FFFFFF; padding-bottom: 16px; padding-top: 40px; padding-horizontal: 24px\\"
                                 >
                                   <div
-                                    className=\\"sc-bczRLJ kKYxQH\\"
                                     flexDirection=\\"row\\"
                                     justifyContent=\\"space-between\\"
+                                    style=\\"flex-direction: row; justify-content: space-between\\"
                                   >
                                     <div
-                                      className=\\"sc-bczRLJ bcHLDf\\"
                                       flexGrow={1}
+                                      style=\\"flex-grow: 1px\\"
                                     >
                                       <div
                                         alignItems=\\"center\\"
-                                        className=\\"sc-bczRLJ cdKnJO\\"
                                         flexDirection=\\"row\\"
                                         mb=\\"16px\\"
+                                        style=\\"flex-direction: row; align-items: center; margin-bottom: 16px\\"
                                       >
                                         <div
                                           fill=\\"#004E87\\"
@@ -161,16 +161,16 @@ describe('fixtures', () => {
                                         />
                                       </div>
                                       <div
-                                        className=\\"sc-bczRLJ fFDfYY\\"
                                         flexGrow={1}
+                                        style=\\"flex-grow: 1px; width: 100%\\"
                                         w=\\"100%\\"
                                       >
                                         <p
-                                          className=\\"sc-gsnTZi cNeZGI\\"
                                           color=\\"brand_primary_darkest\\"
+                                          style=\\"color: #004E87; max-width: 100%; font-size: 32px; font-family: Fieldwork-HumBold; letter-spacing: 0px; line-height: 38.4px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
                                           type=\\"h2\\"
                                         >
-                                          Services
+                                          Serviços
                                         </p>
                                       </div>
                                     </div>
@@ -178,52 +178,50 @@ describe('fixtures', () => {
                                 </div>
                                 <div
                                   bg=\\"#FFFFFF\\"
-                                  className=\\"sc-bczRLJ iSdUlB\\"
                                   pt=\\"24px\\"
                                   px=\\"24px\\"
+                                  style=\\"background-color: #FFFFFF; padding-top: 24px; padding-horizontal: 24px\\"
                                 >
                                   <p
-                                    className=\\"sc-gsnTZi zIiGn\\"
                                     color=\\"neutral_medium\\"
-                                    style=\\"line-height: 20.8px\\"
+                                    style=\\"color: #9FA5AF; max-width: 100%; font-size: 12px; font-family: Roboto-Regular; letter-spacing: 0.8px; line-height: 20.8px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
                                     type=\\"caption\\"
                                   >
-                                    Vehicle
+                                    Veículo
                                   </p>
                                   <p
-                                    className=\\"sc-gsnTZi gaqqUb\\"
-                                    style=\\"line-height: 22.200000000000003px\\"
+                                    style=\\"color: #131416; max-width: 100%; font-size: 18px; font-family: Fieldwork-HumBold; letter-spacing: 0.5px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; line-height: 22.200000000000003px\\"
                                     type=\\"subtitle2\\"
                                   >
-                                    Vehicle model
+                                    Renegade 1.8 At
                                   </p>
                                   <p
-                                    className=\\"sc-gsnTZi cxsjCY\\"
                                     color=\\"neutral_dark\\"
+                                    style=\\"color: #454A53; max-width: 100%; font-size: 14px; font-family: Roboto-Regular; letter-spacing: 0.25px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
                                     type=\\"body2\\"
                                   >
-                                    GEL xxxx
+                                    GEL 1G46
                                   </p>
                                   <div
-                                    className=\\"sc-bczRLJ brFAmV\\"
                                     pb=\\"24px\\"
                                     pt=\\"8px\\"
+                                    style=\\"padding-bottom: 24px; padding-top: 8px\\"
                                   >
                                     <div
-                                      className=\\"sc-ksZaOG gbXoHh\\"
                                       color=\\"neutral_lightest\\"
                                       height=\\"1px\\"
+                                      style=\\"height: 1px; width: 100%; background-color: #F5F5F6\\"
                                       width=\\"100%\\"
                                     />
                                   </div>
                                 </div>
                                 <div
-                                  className=\\"sc-bczRLJ jWRABx\\"
                                   px=\\"24px\\"
+                                  style=\\"padding-horizontal: 24px\\"
                                 >
                                   <div
-                                    className=\\"sc-bczRLJ kBQmvj\\"
                                     mb=\\"24px\\"
+                                    style=\\"margin-bottom: 24px\\"
                                   />
                                 </div>
                               </div>
