@@ -1,7 +1,7 @@
 import { format as prettyFormat, plugins } from "pretty-format";
 import { match } from 'ts-pattern'
 import { InputRNtoHTML, MappedNode, RnComponentsUnion } from "./types";
-import { isValidElement, convertToKebabCase } from "./utils";
+import { isValidElement, convertToKebabCase, convertToInlineStyle, convertToPx } from "./utils";
 
 
 const mapNodeType = (node: InputRNtoHTML): MappedNode => {
@@ -17,6 +17,15 @@ const mapStyleProp = (node: MappedNode) => {
     return node
   }
   const kebabStyle = convertToKebabCase(node.props.style)
+  const kebabStyleWithPx = convertToPx(kebabStyle)
+  const inlineStyle = convertToInlineStyle(kebabStyleWithPx)
+  return {
+    ...node,
+    props: {
+      ...node.props,
+      style: inlineStyle
+    }
+  }
 }
 
 
@@ -30,17 +39,11 @@ export const fromRNtoHTML = (input: InputRNtoHTML) =>
 const ReactTestNativeJestPreview = {
   test: (v: InputRNtoHTML) => isValidElement(v) || plugins.ReactTestComponent.test(v),
   serialize: (node: InputRNtoHTML, config: any, indentation: any, depth: any, refs: any, printer: any) => {
-    let newVal = node;
     const mappedNode = mapNodeType(node)
+    const mappedStyle = mapStyleProp(mappedNode)
 
-    if (node?.props?.style) {
-      newVal = {
-        ...newVal,
-        props: { ...node.props, style: convertToKebabCase(node.props.style) },
-      };
-    }
     return plugins.ReactElement.serialize(
-      mappedNode,
+      mappedStyle,
       config,
       indentation,
       depth,

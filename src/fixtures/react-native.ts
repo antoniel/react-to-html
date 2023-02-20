@@ -1,5 +1,5 @@
 
-type Base = { children?: React.ReactNode }
+type Base = { children?: React.ReactNode; style?: Record<string, string | number> }
 
 export const AccessibilityInfo = (_: Base) => null
 export const ActivityIndicator = (_: Base) => null
