@@ -120,7 +120,7 @@ describe('fixtures', () => {
                       style=\\"flex: 1; transform: translateX(0px) translateX(0px)\\"
                     >
                       <div
-                        style=\\"0: [object Object]px; 1: [object Object]px; flex: 1; overflow: hidden\\"
+                        style=\\"flex: 1; overflow: hidden; background-color: white\\"
                       >
                         <div
                           style=\\"flex: 1; flex-direction: column-reverse\\"

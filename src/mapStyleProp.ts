@@ -54,7 +54,9 @@ export function convertToKebabCase(style: StyleRecord): StyleRecord {
 }
 
 // onStyleValues we may have  style: [{ flex: 1 }, null], we should filter and merge all the styles
-type StyleRecordRaw = Array<null | undefined | StyleRecord> | StyleRecord;
+type StyleRecordRaw =
+  | Array<null | undefined | StyleRecord | Array<StyleRecord>>
+  | StyleRecord;
 
 const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
   if (Array.isArray(style)) {
@@ -62,11 +64,17 @@ const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
       return {};
     }
     return style
-      .filter((v): v is StyleRecord => Boolean(v))
+      .filter((v): v is StyleRecord | Array<StyleRecord> => Boolean(v))
       .reduce((acc, curr) => {
-        if (curr === null) return acc;
+        if (Array.isArray(acc)) {
+          throw new Error('acc should not be an array');
+        }
+        if (Array.isArray(curr)) {
+          const merged = mergeStyles(curr);
+          return { ...acc, ...merged };
+        }
         return { ...acc, ...curr };
-      }, {} as StyleRecord);
+      }, {} as StyleRecord) as StyleRecord;
   }
   return style;
 };
@@ -82,6 +90,23 @@ if (import.meta.vitest) {
     test('Merge styles with null', () => {
       expect(mergeStyles([{ flex: 1 }, null, { flex: 2 }])).toEqual({
         flex: 2,
+      });
+    });
+    test('Merge nested arrays of styles', () => {
+      const some = mergeStyles([
+        { flex: 1, overflow: 'hidden' },
+        [
+          {
+            backgroundColor: 'rgb(242, 242, 242)',
+          },
+          { backgroundColor: 'white' },
+        ],
+      ]);
+
+      expect(some).toEqual({
+        backgroundColor: 'white',
+        flex: 1,
+        overflow: 'hidden',
       });
     });
   });
