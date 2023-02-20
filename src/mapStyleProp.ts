@@ -63,19 +63,21 @@ const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
     if (style.length === 0) {
       return {};
     }
-    return style
-      .filter((v): v is StyleRecord | Array<StyleRecord> => Boolean(v))
-      .reduce((acc, curr) => {
-        if (Array.isArray(acc)) {
-          throw new Error('acc should not be an array');
-        }
-        if (Array.isArray(curr)) {
-          const merged = mergeStyles(curr);
-          return { ...acc, ...merged };
-        }
-        return { ...acc, ...curr };
-      }, {} as StyleRecord) as StyleRecord;
+
+    const styles = style.filter((v): v is StyleRecord | Array<StyleRecord> =>
+      Boolean(v)
+    );
+
+    return styles.reduce((acc: StyleRecord, curr) => {
+      if (Array.isArray(curr)) {
+        const merged = mergeStyles(curr);
+        return { ...acc, ...merged };
+      }
+
+      return { ...acc, ...curr };
+    }, {});
   }
+
   return style;
 };
 
