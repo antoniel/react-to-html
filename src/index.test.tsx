@@ -46,16 +46,16 @@ describe('fixtures', () => {
       "<div
         style=\\"flex: 1\\"
       >
-        <RNCSafeAreaProvider
+        <div
           style=\\"flex: 1\\"
         >
           <div
             style=\\"flex: 1; background-color: rgb(242, 242, 242)\\"
           >
-            <RNSScreenContainer
+            <div
               style=\\"flex: 1\\"
             >
-              <RNSScreen
+              <div
                 activityState={2}
                 gestureResponseDistance={
                   {
@@ -128,7 +128,7 @@ describe('fixtures', () => {
                           <div
                             style=\\"flex: 1\\"
                           >
-                            <RCTScrollView
+                            <div
                               style=\\"background-color: #FFFFFF\\"
                             >
                               <div>
@@ -154,7 +154,7 @@ describe('fixtures', () => {
                                         flexDirection=\\"row\\"
                                         mb=\\"16px\\"
                                       >
-                                        <test-file-stub
+                                        <div
                                           fill=\\"#004E87\\"
                                           height={24}
                                           width={24}
@@ -227,21 +227,21 @@ describe('fixtures', () => {
                                   />
                                 </div>
                               </div>
-                            </RCTScrollView>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </RNSScreen>
-            </RNSScreenContainer>
+              </div>
+            </div>
             <div
               pointerEvents=\\"box-none\\"
               style=\\"z-index: 1px; height: 44px; position: absolute; top: 0px; left: 0px; right: 0px\\"
             />
           </div>
-        </RNCSafeAreaProvider>
+        </div>
       </div>"
     `);
   });
