@@ -1,7 +1,8 @@
 import { format as prettyFormat, plugins } from "pretty-format";
 import { match } from 'ts-pattern'
+import { mapStyleProp } from "./mapStyleProp";
 import { InputRNtoHTML, MappedNode, RnComponentsUnion } from "./types";
-import { isValidElement, convertToKebabCase, convertToInlineStyle, convertToPx } from "./utils";
+import { isValidElement } from "./utils";
 
 
 const mapNodeType = (node: InputRNtoHTML): MappedNode => {
@@ -11,23 +12,6 @@ const mapNodeType = (node: InputRNtoHTML): MappedNode => {
     .with('View', () => ({ ...node, type: "div" }))
     .otherwise(() => ({ ...node, type: actualType }))
 }
-
-const mapStyleProp = (node: MappedNode) => {
-  if (!node?.props?.style) {
-    return node
-  }
-  const kebabStyle = convertToKebabCase(node.props.style)
-  const kebabStyleWithPx = convertToPx(kebabStyle)
-  const inlineStyle = convertToInlineStyle(kebabStyleWithPx)
-  return {
-    ...node,
-    props: {
-      ...node.props,
-      style: inlineStyle
-    }
-  }
-}
-
 
 export const fromRNtoHTML = (input: InputRNtoHTML) =>
   prettyFormat(input, {
@@ -39,10 +23,13 @@ export const fromRNtoHTML = (input: InputRNtoHTML) =>
 const ReactTestNativeJestPreview = {
   test: (v: InputRNtoHTML) => !!isValidElement(v) || plugins.ReactTestComponent.test(v),
   serialize: (node: InputRNtoHTML, config: any, indentation: any, depth: any, refs: any, printer: any) => {
+    // The react-test-components have a different structure than the react-elements
+    // they get children out of the props object
+    const serializeByCheckRectElementOrRectTestComponent = node?.children ? plugins.ReactTestComponent.serialize : plugins.ReactElement.serialize
     const mappedNode = mapNodeType(node)
     const mappedStyle = mapStyleProp(mappedNode)
 
-    return plugins.ReactElement.serialize(
+    return serializeByCheckRectElementOrRectTestComponent(
       mappedStyle,
       config,
       indentation,
