@@ -37,7 +37,7 @@ export const fromRNtoHTML = (input: InputRNtoHTML) =>
   });
 
 const ReactTestNativeJestPreview = {
-  test: (v: InputRNtoHTML) => isValidElement(v) || plugins.ReactTestComponent.test(v),
+  test: (v: InputRNtoHTML) => !!isValidElement(v) || plugins.ReactTestComponent.test(v),
   serialize: (node: InputRNtoHTML, config: any, indentation: any, depth: any, refs: any, printer: any) => {
     const mappedNode = mapNodeType(node)
     const mappedStyle = mapStyleProp(mappedNode)
