@@ -40,17 +40,26 @@ const convertToInlineStyle = (style: StyleRecord): string => {
 };
 
 const convertToPx = (style: StyleRecord): StyleRecord => {
-  return R.toEntries(style).reduce((acc, [key, value]) => {
-    const isFlex = key === 'flex';
-    if (S.isString(value) || isFlex) {
-      acc[key] = value;
-      return acc;
-    }
+  type Entries = Array<[string, string | number]>;
+  const isFlex = (key: string) => key === 'flex';
+  const shouldSkipConvertToPx = (key: string, value: string | number) => {
+    return S.isString(value) || isFlex(key);
+  };
 
-    acc[key] = `${value}px`;
-    return acc;
-  }, {} as StyleRecord);
+  return pipe(
+    R.toEntries(style),
+    A.reduce(
+      [] as Entries,
+      (acc, [key, value]): Entries => {
+        return shouldSkipConvertToPx(key, value)
+          ? [...acc, [key, value]]
+          : [...acc, [key, `${value}px`]];
+      }
+    ),
+    R.fromEntries
+  );
 };
+
 function convertToKebabCase(style: StyleRecord): StyleRecord {
   const kebabObj: StyleRecord = {};
   for (const key in style) {
