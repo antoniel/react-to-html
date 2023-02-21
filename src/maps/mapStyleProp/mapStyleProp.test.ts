@@ -1,20 +1,20 @@
-import { mergeStyles } from './mapStyleProp';
+import { mergeArrayStyles } from './mergeArrayStyles';
 import { handleTransformStyle } from './handleTransformStyle';
 
 describe('Merge Styles', () => {
   test('Base', () => {
-    expect(mergeStyles([])).toEqual({});
+    expect(mergeArrayStyles([])).toEqual({});
   });
   test('Merge styles', () => {
-    expect(mergeStyles([{ flex: 1 }, { flex: 2 }])).toEqual({ flex: 2 });
+    expect(mergeArrayStyles([{ flex: 1 }, { flex: 2 }])).toEqual({ flex: 2 });
   });
   test('Merge styles with null', () => {
-    expect(mergeStyles([{ flex: 1 }, null, { flex: 2 }])).toEqual({
+    expect(mergeArrayStyles([{ flex: 1 }, null, { flex: 2 }])).toEqual({
       flex: 2,
     });
   });
   test('Merge nested arrays of styles', () => {
-    const some = mergeStyles([
+    const some = mergeArrayStyles([
       { flex: 1, overflow: 'hidden' },
       [
         {
