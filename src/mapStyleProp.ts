@@ -23,13 +23,13 @@ export const mapStyleProp = (node: MappedNode) => {
     },
   };
 };
-export const convertToInlineStyle = (style: StyleRecord): string => {
+const convertToInlineStyle = (style: StyleRecord): string => {
   return Object.entries(style)
     .map(([key, value]) => `${key}: ${value}`)
     .join('; ');
 };
 
-export const convertToPx = (style: StyleRecord): StyleRecord => {
+const convertToPx = (style: StyleRecord): StyleRecord => {
   return Object.entries(style).reduce((acc, [key, value]) => {
     const isString = typeof value === 'string';
     const isFlex = key === 'flex';
@@ -42,7 +42,7 @@ export const convertToPx = (style: StyleRecord): StyleRecord => {
     return acc;
   }, {} as StyleRecord);
 };
-export function convertToKebabCase(style: StyleRecord): StyleRecord {
+function convertToKebabCase(style: StyleRecord): StyleRecord {
   const kebabObj: StyleRecord = {};
   for (const key in style) {
     if (style.hasOwnProperty(key)) {
@@ -57,7 +57,7 @@ type StyleRecordRaw =
   | Array<null | undefined | StyleRecord | Array<StyleRecord>>
   | StyleRecord;
 
-const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
+export const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
   if (Array.isArray(style)) {
     if (style.length === 0) {
       return {};
@@ -80,44 +80,11 @@ const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
   return style;
 };
 
-if (import.meta.vitest) {
-  describe('Merge Styles', () => {
-    test('Base', () => {
-      expect(mergeStyles([])).toEqual({});
-    });
-    test('Merge styles', () => {
-      expect(mergeStyles([{ flex: 1 }, { flex: 2 }])).toEqual({ flex: 2 });
-    });
-    test('Merge styles with null', () => {
-      expect(mergeStyles([{ flex: 1 }, null, { flex: 2 }])).toEqual({
-        flex: 2,
-      });
-    });
-    test('Merge nested arrays of styles', () => {
-      const some = mergeStyles([
-        { flex: 1, overflow: 'hidden' },
-        [
-          {
-            backgroundColor: 'rgb(242, 242, 242)',
-          },
-          { backgroundColor: 'white' },
-        ],
-      ]);
-
-      expect(some).toEqual({
-        backgroundColor: 'white',
-        flex: 1,
-        overflow: 'hidden',
-      });
-    });
-  });
-}
-
 type TransformStyle = Record<
   string,
   string | number | Array<Record<string, number | string>>
 >;
-const handleTransformStyle = (style: TransformStyle) => {
+export const handleTransformStyle = (style: TransformStyle) => {
   const assertIsTransform = (
     key: string,
     value: any
@@ -146,26 +113,3 @@ const handleTransformStyle = (style: TransformStyle) => {
     return { ...acc, [key]: objectTransformValues };
   }, {} as StyleRecord);
 };
-
-if (import.meta.vitest) {
-  describe('Transform Style', () => {
-    test('Output transform string with units', () => {
-      expect(
-        handleTransformStyle({
-          transform: [{ translateX: 10 }, { translateY: '10%' }],
-        })
-      ).toEqual({
-        transform: 'translateX(10px) translateY(10%)',
-      });
-    });
-    test('Inputs without transform', () => {
-      expect(
-        handleTransformStyle({
-          color: 'red',
-          backgroundColor: '#00f',
-          fontSize: 32,
-        })
-      ).toEqual({ color: 'red', backgroundColor: '#00f', fontSize: 32 });
-    });
-  });
-}
