@@ -1,39 +1,48 @@
 import { MappedNode, StyleRecord } from './types';
 import { pipe } from 'fp-ts/lib/function';
+import * as O from 'fp-ts/lib/Option';
+import * as A from 'fp-ts/lib/Array';
+import * as S from 'fp-ts/lib/string';
+import * as R from 'fp-ts/lib/Record';
 
 export const mapStyleProp = (node: MappedNode) => {
-  if (!node?.props?.style) {
-    return node;
-  }
-
-  const style = pipe(
-    node.props.style,
-    mergeStyles,
-    handleTransformStyle,
-    convertToKebabCase,
-    convertToPx,
-    convertToInlineStyle
+  const mappedStyle = pipe(
+    O.fromNullable(node.props.style),
+    O.fold(
+      () => undefined,
+      styleProp =>
+        pipe(
+          styleProp,
+          mergeStyles,
+          handleTransformStyle,
+          convertToKebabCase,
+          convertToPx,
+          convertToInlineStyle
+        )
+    )
   );
 
   return {
     ...node,
     props: {
       ...node.props,
-      style: style,
+      style: mappedStyle,
     },
   };
 };
+
 const convertToInlineStyle = (style: StyleRecord): string => {
-  return Object.entries(style)
-    .map(([key, value]) => `${key}: ${value}`)
-    .join('; ');
+  return pipe(
+    Object.entries(style),
+    A.map(([key, value]) => `${key}: ${value}`),
+    A.intercalate(S.Monoid)('; ')
+  );
 };
 
 const convertToPx = (style: StyleRecord): StyleRecord => {
   return Object.entries(style).reduce((acc, [key, value]) => {
-    const isString = typeof value === 'string';
     const isFlex = key === 'flex';
-    if (isString || isFlex) {
+    if (S.isString(value) || isFlex) {
       acc[key] = value;
       return acc;
     }
