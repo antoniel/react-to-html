@@ -1,10 +1,11 @@
-import { MappedNode, StyleRecord } from './types';
 import { pipe, identity, flow } from 'fp-ts/lib/function';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
 import * as S from 'fp-ts/lib/string';
 import * as R from 'fp-ts/lib/Record';
 import * as E from 'fp-ts/lib/Either';
+import { handleTransformStyle } from './handleTransformStyle';
+import { MappedNode, StyleRecord } from '../../types';
 
 export const mapStyleProp = (node: MappedNode) => {
   const mappedStyle = pipe(
@@ -42,7 +43,7 @@ const convertToInlineStyle = (style: StyleRecord): string => {
 
 type Entry = [string, string | number];
 type Entries = Entry[];
-const convertToPx = (style: StyleRecord): StyleRecord => {
+export const convertToPx = (style: StyleRecord): StyleRecord => {
   const isFlex = (key: string) => key === 'flex';
   const shouldSkipConvertToPx = (key: string, value: string | number) => {
     return S.isString(value) || isFlex(key);
@@ -114,38 +115,4 @@ export const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
     ),
     E.getOrElse(a => a)
   );
-};
-
-type TransformStyle = Record<
-  string,
-  string | number | Array<Record<string, number | string>>
->;
-export const handleTransformStyle = (style: TransformStyle) => {
-  const assertIsTransform = (
-    key: string,
-    value: any
-  ): value is Array<Record<string, any>> => {
-    return key === 'transform' && Array.isArray(value);
-  };
-
-  return Object.entries(style).reduce((acc, [key, objectTransformValues]) => {
-    if (assertIsTransform(key, objectTransformValues)) {
-      const transformValue = objectTransformValues.map(convertToPx);
-      const transformString = transformValue
-        .map((transform: StyleRecord) =>
-          Object.entries(transform)
-            .map(
-              ([transformKey, transformValue]) =>
-                `${transformKey}(${transformValue})`
-            )
-            .join(' ')
-        )
-        .join(' ');
-      return {
-        ...acc,
-        transform: transformString,
-      };
-    }
-    return { ...acc, [key]: objectTransformValues };
-  }, {} as StyleRecord);
 };

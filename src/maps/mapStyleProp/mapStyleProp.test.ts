@@ -1,4 +1,5 @@
-import { handleTransformStyle, mergeStyles } from './mapStyleProp';
+import { mergeStyles } from './mapStyleProp';
+import { handleTransformStyle } from './handleTransformStyle';
 
 describe('Merge Styles', () => {
   test('Base', () => {

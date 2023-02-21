@@ -1,6 +1,6 @@
 import { format as prettyFormat, plugins } from 'pretty-format';
 import { match } from 'ts-pattern';
-import { mapStyleProp } from './mapStyleProp';
+import { mapStyleProp } from './maps/mapStyleProp/mapStyleProp';
 import { InputRNtoHTML, MappedNode, RnComponentsUnion } from './types';
 import { isValidElement } from './utils';
 
