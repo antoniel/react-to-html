@@ -1,9 +1,10 @@
 import { MappedNode, StyleRecord } from './types';
-import { pipe } from 'fp-ts/lib/function';
+import { pipe, identity, flow } from 'fp-ts/lib/function';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
 import * as S from 'fp-ts/lib/string';
 import * as R from 'fp-ts/lib/Record';
+import * as E from 'fp-ts/lib/Either';
 
 export const mapStyleProp = (node: MappedNode) => {
   const mappedStyle = pipe(
@@ -39,8 +40,9 @@ const convertToInlineStyle = (style: StyleRecord): string => {
   );
 };
 
+type Entry = [string, string | number];
+type Entries = Entry[];
 const convertToPx = (style: StyleRecord): StyleRecord => {
-  type Entries = Array<[string, string | number]>;
   const isFlex = (key: string) => key === 'flex';
   const shouldSkipConvertToPx = (key: string, value: string | number) => {
     return S.isString(value) || isFlex(key);
@@ -61,14 +63,14 @@ const convertToPx = (style: StyleRecord): StyleRecord => {
 };
 
 function convertToKebabCase(style: StyleRecord): StyleRecord {
-  const kebabObj: StyleRecord = {};
-  for (const key in style) {
-    if (style.hasOwnProperty(key)) {
-      const kebabKey = key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`);
-      kebabObj[kebabKey] = style[key];
-    }
-  }
-  return kebabObj;
+  return pipe(
+    R.toEntries(style),
+    A.map<Entry, Entry>(([key, value]) => [
+      key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`),
+      value,
+    ]),
+    R.fromEntries
+  );
 }
 
 type StyleRecordRaw =
@@ -76,26 +78,30 @@ type StyleRecordRaw =
   | StyleRecord;
 
 export const mergeStyles = (style: StyleRecordRaw): StyleRecord => {
-  if (Array.isArray(style)) {
-    if (style.length === 0) {
-      return {};
-    }
-
-    const styles = style.filter((v): v is StyleRecord | Array<StyleRecord> =>
-      Boolean(v)
-    );
-
-    return styles.reduce((acc: StyleRecord, curr) => {
-      if (Array.isArray(curr)) {
-        const merged = mergeStyles(curr);
-        return { ...acc, ...merged };
-      }
-
-      return { ...acc, ...curr };
-    }, {});
-  }
-
-  return style;
+  return pipe(
+    style,
+    E.fromPredicate(Array.isArray, identity),
+    E.map(
+      flow(
+        A.filter(Boolean),
+        E.fromPredicate(A.isNonEmpty, identity),
+        E.map(
+          A.reduce({}, (acc: StyleRecord, curr) => {
+            return pipe(
+              curr,
+              O.fromPredicate(Array.isArray),
+              O.fold(
+                () => ({ ...acc, ...curr }),
+                () => ({ ...acc, ...mergeStyles(curr) })
+              )
+            );
+          })
+        ),
+        E.getOrElse(() => ({}))
+      )
+    ),
+    E.getOrElse(identity)
+  );
 };
 
 type TransformStyle = Record<
