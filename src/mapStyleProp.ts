@@ -40,7 +40,7 @@ const convertToInlineStyle = (style: StyleRecord): string => {
 };
 
 const convertToPx = (style: StyleRecord): StyleRecord => {
-  return Object.entries(style).reduce((acc, [key, value]) => {
+  return R.toEntries(style).reduce((acc, [key, value]) => {
     const isFlex = key === 'flex';
     if (S.isString(value) || isFlex) {
       acc[key] = value;

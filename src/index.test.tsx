@@ -30,7 +30,7 @@ describe('fromRNtoHTML', () => {
     expect(some).toMatchInlineSnapshot(`
       "<div>
         <p
-          style=\\"color: red; background-color: #00f; font-size: 32px\\"
+          style=\\"background-color: #00f; color: red; font-size: 32px\\"
         >
           oi
         </p>
@@ -50,7 +50,7 @@ describe('fixtures', () => {
           style=\\"flex: 1\\"
         >
           <div
-            style=\\"flex: 1; background-color: rgb(242, 242, 242)\\"
+            style=\\"background-color: rgb(242, 242, 242); flex: 1\\"
           >
             <div
               style=\\"flex: 1\\"
@@ -66,7 +66,7 @@ describe('fixtures', () => {
                   }
                 }
                 pointerEvents=\\"box-none\\"
-                style=\\"position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px\\"
+                style=\\"bottom: 0px; left: 0px; position: absolute; right: 0px; top: 0px\\"
               >
                 <div
                   collapsable={false}
@@ -78,7 +78,7 @@ describe('fixtures', () => {
                   gestureVelocityImpact={0.3}
                   importantForAccessibility=\\"auto\\"
                   pointerEvents=\\"box-none\\"
-                  style=\\"display: flex; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px\\"
+                  style=\\"bottom: 0px; display: flex; left: 0px; position: absolute; right: 0px; top: 0px\\"
                   transitionSpec={
                     {
                       \\"close\\": {
@@ -120,7 +120,7 @@ describe('fixtures', () => {
                       style=\\"flex: 1; transform: translateX(0px) translateX(0px)\\"
                     >
                       <div
-                        style=\\"flex: 1; overflow: hidden; background-color: white\\"
+                        style=\\"background-color: white; flex: 1; overflow: hidden\\"
                       >
                         <div
                           style=\\"flex: 1; flex-direction: column-reverse\\"
@@ -137,7 +137,7 @@ describe('fixtures', () => {
                                   pb=\\"16px\\"
                                   pt=\\"40px\\"
                                   px=\\"24px\\"
-                                  style=\\"background-color: #FFFFFF; padding-bottom: 16px; padding-top: 40px; padding-horizontal: 24px\\"
+                                  style=\\"background-color: #FFFFFF; padding-bottom: 16px; padding-horizontal: 24px; padding-top: 40px\\"
                                 >
                                   <div
                                     flexDirection=\\"row\\"
@@ -152,7 +152,7 @@ describe('fixtures', () => {
                                         alignItems=\\"center\\"
                                         flexDirection=\\"row\\"
                                         mb=\\"16px\\"
-                                        style=\\"flex-direction: row; align-items: center; margin-bottom: 16px\\"
+                                        style=\\"align-items: center; flex-direction: row; margin-bottom: 16px\\"
                                       >
                                         <div
                                           fill=\\"#004E87\\"
@@ -167,7 +167,7 @@ describe('fixtures', () => {
                                       >
                                         <p
                                           color=\\"brand_primary_darkest\\"
-                                          style=\\"color: #004E87; max-width: 100%; font-size: 32px; font-family: Fieldwork-HumBold; letter-spacing: 0px; line-height: 38.4px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
+                                          style=\\"color: #004E87; font-family: Fieldwork-HumBold; font-size: 32px; font-weight: 400; letter-spacing: 0px; line-height: 38.4px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; max-width: 100%; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; text-align: left\\"
                                           type=\\"h2\\"
                                         >
                                           Serviços
@@ -180,24 +180,24 @@ describe('fixtures', () => {
                                   bg=\\"#FFFFFF\\"
                                   pt=\\"24px\\"
                                   px=\\"24px\\"
-                                  style=\\"background-color: #FFFFFF; padding-top: 24px; padding-horizontal: 24px\\"
+                                  style=\\"background-color: #FFFFFF; padding-horizontal: 24px; padding-top: 24px\\"
                                 >
                                   <p
                                     color=\\"neutral_medium\\"
-                                    style=\\"color: #9FA5AF; max-width: 100%; font-size: 12px; font-family: Roboto-Regular; letter-spacing: 0.8px; line-height: 20.8px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
+                                    style=\\"color: #9FA5AF; font-family: Roboto-Regular; font-size: 12px; font-weight: 400; letter-spacing: 0.8px; line-height: 20.8px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; max-width: 100%; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; text-align: left\\"
                                     type=\\"caption\\"
                                   >
                                     Veículo
                                   </p>
                                   <p
-                                    style=\\"color: #131416; max-width: 100%; font-size: 18px; font-family: Fieldwork-HumBold; letter-spacing: 0.5px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; line-height: 22.200000000000003px\\"
+                                    style=\\"color: #131416; font-family: Fieldwork-HumBold; font-size: 18px; font-weight: 400; letter-spacing: 0.5px; line-height: 22.200000000000003px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; max-width: 100%; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; text-align: left\\"
                                     type=\\"subtitle2\\"
                                   >
                                     Renegade 1.8 At
                                   </p>
                                   <p
                                     color=\\"neutral_dark\\"
-                                    style=\\"color: #454A53; max-width: 100%; font-size: 14px; font-family: Roboto-Regular; letter-spacing: 0.25px; text-align: left; font-weight: 400; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px\\"
+                                    style=\\"color: #454A53; font-family: Roboto-Regular; font-size: 14px; font-weight: 400; letter-spacing: 0.25px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; max-width: 100%; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; text-align: left\\"
                                     type=\\"body2\\"
                                   >
                                     GEL 1G46
@@ -210,7 +210,7 @@ describe('fixtures', () => {
                                     <div
                                       color=\\"neutral_lightest\\"
                                       height=\\"1px\\"
-                                      style=\\"height: 1px; width: 100%; background-color: #F5F5F6\\"
+                                      style=\\"background-color: #F5F5F6; height: 1px; width: 100%\\"
                                       width=\\"100%\\"
                                     />
                                   </div>
@@ -236,7 +236,7 @@ describe('fixtures', () => {
             </div>
             <div
               pointerEvents=\\"box-none\\"
-              style=\\"z-index: 1px; height: 44px; position: absolute; top: 0px; left: 0px; right: 0px\\"
+              style=\\"height: 44px; left: 0px; position: absolute; right: 0px; top: 0px; z-index: 1px\\"
             />
           </div>
         </div>
